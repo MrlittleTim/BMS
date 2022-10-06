@@ -2,15 +2,21 @@ package com.books.controler;
 
 import com.books.bean.Book;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Manu {
-    Scanner scanner = new Scanner(System.in);
     List<Book> bookList = new ArrayList<>();
+    String filePath = "src/data.txt";
+    final static int ID = 0;
+    final static int NAME = 1;
+    final static int PRICE = 2;
+    final static int AUTHOR = 3;
 
     public int showManu() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("======欢迎使用图书管理系统!=====");
         System.out.println("1----------添加图书----------");
         System.out.println("2----------删除图书----------");
@@ -25,6 +31,7 @@ public class Manu {
     }
 
     public void addBook() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("请输入书籍编号：");
         int id = scanner.nextInt();
         if (queryBookById(id) != null) {
@@ -49,6 +56,7 @@ public class Manu {
     }
 
     public void deleteBook() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("1. 按编号删除");
         System.out.println("2. 按书名删除");
         System.out.print("请选择删除方式：");
@@ -64,6 +72,7 @@ public class Manu {
 
 
     private void deleteBookById() {
+        Scanner scanner = new Scanner(System.in);
         boolean flag = true;
         System.out.print("请输入需要删除的书籍编号：");
         int id = scanner.nextInt();
@@ -81,6 +90,7 @@ public class Manu {
     }
 
     private void deleteBookByName() {
+        Scanner scanner = new Scanner(System.in);
         boolean flag = true;
         System.out.print("请输入需要删除的书名：");
         scanner.nextLine();
@@ -99,6 +109,7 @@ public class Manu {
     }
 
     public void updateBook() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("请输入需要更新的书籍编号：");
         int id = scanner.nextInt();
         int index;
@@ -119,6 +130,7 @@ public class Manu {
     }
 
     public void queryBook() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("1. 按编号查询");
         System.out.println("2. 按书名查询");
         System.out.print("请选择查询方式：");
@@ -148,8 +160,6 @@ public class Manu {
     }
 
 
-
-
     private Book queryBookById(int id) {
         for (int i = 0; i < bookList.size(); i++) {
             if (bookList.get(i).getId() == id) {
@@ -175,6 +185,7 @@ public class Manu {
         System.out.println(book);
         System.out.println("*******************************");
     }
+
     public void printAllBook() {
         System.out.println("*******************************");
         System.out.println("编号\t\t" + "书名\t\t" + "价格\t\t\t" + "作者");
@@ -183,5 +194,59 @@ public class Manu {
             System.out.println(book);
         }
         System.out.println("*******************************");
+    }
+
+    public void readDataFromFile() {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.trim().split(",");
+                int id = Integer.parseInt(data[ID]);
+                String name = data[NAME];
+                double price = Double.parseDouble(data[PRICE]);
+                String author = data[AUTHOR];
+                Book book = new Book(id, name, price, author);
+                bookList.add(book);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void writeDataToFile() {
+        BufferedWriter bw = null;
+        try {
+            StringBuffer sb = new StringBuffer();
+            bw = new BufferedWriter(new FileWriter(new File(filePath), false));
+            for (int i = 0; i < bookList.size(); i++) {
+                Book book = bookList.get(i);
+                sb.append(book.getId()).append(",")
+                        .append(book.getName()).append(",")
+                        .append(book.getPrice()).append(",")
+                        .append(book.getAuthor()).append("\n");
+                bw.write(sb.toString());
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

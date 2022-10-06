@@ -5,18 +5,22 @@ import com.books.controler.Manu;
 public class Client {
     public static void main(String[] args) {
         Manu manu = new Manu();
+        manu.readDataFromFile();
         boolean flag = true;
         while (flag) {
             int choice = manu.showManu();
             switch (choice) {
                 case 1:
                     manu.addBook();
+                    manu.writeDataToFile();
                     break;
                 case 2:
                     manu.deleteBook();
+                    manu.writeDataToFile();
                     break;
                 case 3:
                     manu.updateBook();
+                    manu.writeDataToFile();
                     break;
                 case 4:
                     manu.queryBook();
