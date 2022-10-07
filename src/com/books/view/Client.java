@@ -35,6 +35,7 @@ public class Client {
                     System.out.print("您选择有误！请重新选择：");
             }
         }
+        manu.writeDataToFile();
         System.out.println("系统已退出！");
     }
 }

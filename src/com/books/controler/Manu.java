@@ -39,13 +39,11 @@ public class Manu {
             return;
         }
         System.out.print("请输入书名：");
-        scanner.nextLine();
-        String name = scanner.nextLine();
+        String name = scanner.next();
         System.out.print("请输入价格：");
         double price = scanner.nextDouble();
         System.out.print("请输入作者：");
-        scanner.nextLine();
-        String author = scanner.nextLine();
+        String author = scanner.next();
         Book book = new Book(id, name, price, author);
         boolean add = bookList.add(book);
         if (add) {
@@ -93,8 +91,7 @@ public class Manu {
         Scanner scanner = new Scanner(System.in);
         boolean flag = true;
         System.out.print("请输入需要删除的书名：");
-        scanner.nextLine();
-        String name = scanner.nextLine();
+        String name = scanner.next();
         for (int i = 0; i < bookList.size(); i++) {
             if (bookList.get(i).getName().equals(name)) {
                 bookList.remove(i);
@@ -115,13 +112,11 @@ public class Manu {
         int index;
         if ((index = bookList.indexOf(queryBookById(id))) != -1) {
             System.out.print("请输入需要更新的书籍名称：");
-            scanner.nextLine();
-            String name = scanner.nextLine();
+            String name = scanner.next();
             System.out.print("请输入需要更新的书籍价格：");
             double price = scanner.nextDouble();
             System.out.print("请输入需要更新的书籍作者：");
-            scanner.nextLine();
-            String author = scanner.nextLine();
+            String author = scanner.next();
             bookList.set(index, new Book(id, name, price, author));
             System.out.println("修改成功！");
         } else {
@@ -146,8 +141,7 @@ public class Manu {
             }
         } else if (choice == 2) {
             System.out.print("请输入需要查询的书籍名称：");
-            scanner.nextLine();
-            String name = scanner.nextLine();
+            String name = scanner.next();
             Book book = queryBookByName(name);
             if (book != null) {
                 printBook(book);
@@ -179,21 +173,21 @@ public class Manu {
     }
 
     private void printBook(Book book) {
-        System.out.println("*******************************");
+        System.out.println("*********************************");
         System.out.println("编号\t\t" + "书名\t\t" + "价格\t\t\t" + "作者");
-        System.out.println("*******************************");
+        System.out.println("*********************************");
         System.out.println(book);
-        System.out.println("*******************************");
+        System.out.println("*********************************");
     }
 
     public void printAllBook() {
-        System.out.println("*******************************");
+        System.out.println("*********************************");
         System.out.println("编号\t\t" + "书名\t\t" + "价格\t\t\t" + "作者");
-        System.out.println("*******************************");
+        System.out.println("*********************************");
         for (Book book : bookList) {
             System.out.println(book);
         }
-        System.out.println("*******************************");
+        System.out.println("*********************************");
     }
 
     public void readDataFromFile() {
@@ -226,9 +220,9 @@ public class Manu {
     public void writeDataToFile() {
         BufferedWriter bw = null;
         try {
-            StringBuffer sb = new StringBuffer();
             bw = new BufferedWriter(new FileWriter(new File(filePath), false));
             for (int i = 0; i < bookList.size(); i++) {
+                StringBuffer sb = new StringBuffer();
                 Book book = bookList.get(i);
                 sb.append(book.getId()).append(",")
                         .append(book.getName()).append(",")
