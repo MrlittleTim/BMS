@@ -5,11 +5,12 @@ import com.books.bean.Book;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Manu {
     List<Book> bookList = new ArrayList<>();
-    String filePath = "src/data.txt";
+//    String filePath = "src/data.txt";
     final static int ID = 0;
     final static int NAME = 1;
     final static int PRICE = 2;
@@ -193,6 +194,10 @@ public class Manu {
     public void readDataFromFile() {
         BufferedReader br = null;
         try {
+            InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("file.properties");
+            Properties properties = new Properties();
+            properties.load(is);
+            String filePath = properties.getProperty("filePath");
             br = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = br.readLine()) != null) {
@@ -220,6 +225,10 @@ public class Manu {
     public void writeDataToFile() {
         BufferedWriter bw = null;
         try {
+            InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("file.properties");
+            Properties properties = new Properties();
+            properties.load(is);
+            String filePath = properties.getProperty("filePath");
             bw = new BufferedWriter(new FileWriter(new File(filePath), false));
             for (int i = 0; i < bookList.size(); i++) {
                 StringBuffer sb = new StringBuffer();
