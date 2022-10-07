@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Manu {
     List<Book> bookList = new ArrayList<>();
-//    String filePath = "src/data.txt";
+    //    String filePath = "src/data.txt";
     final static int ID = 0;
     final static int NAME = 1;
     final static int PRICE = 2;
@@ -46,12 +46,8 @@ public class Manu {
         System.out.print("请输入作者：");
         String author = scanner.next();
         Book book = new Book(id, name, price, author);
-        boolean add = bookList.add(book);
-        if (add) {
-            System.out.println("添加成功！");
-        } else {
-            System.out.println("添加失败！");
-        }
+        bookList.add(book);
+        System.out.println("添加成功！");
     }
 
     public void deleteBook() {
@@ -156,18 +152,28 @@ public class Manu {
 
 
     private Book queryBookById(int id) {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).getId() == id) {
-                return bookList.get(i);
+//        for (int i = 0; i < bookList.size(); i++) {
+//            if (bookList.get(i).getId() == id) {
+//                return bookList.get(i);
+//            }
+//        }
+        for (Book book : bookList) {
+            if (book.getId() == id) {
+                return book;
             }
         }
         return null;
     }
 
     private Book queryBookByName(String name) {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).getName().equals(name)) {
-                return bookList.get(i);
+//        for (int i = 0; i < bookList.size(); i++) {
+//            if (bookList.get(i).getName().equals(name)) {
+//                return bookList.get(i);
+//            }
+//        }
+        for (Book book : bookList) {
+            if (name.equals(book.getName())) {
+                return book;
             }
         }
         return null;
@@ -229,10 +235,19 @@ public class Manu {
             Properties properties = new Properties();
             properties.load(is);
             String filePath = properties.getProperty("filePath");
-            bw = new BufferedWriter(new FileWriter(new File(filePath), false));
-            for (int i = 0; i < bookList.size(); i++) {
+            bw = new BufferedWriter(new FileWriter(filePath));
+//            for (int i = 0; i < bookList.size(); i++) {
+//                StringBuffer sb = new StringBuffer();
+//                Book book = bookList.get(i);
+//                sb.append(book.getId()).append(",")
+//                        .append(book.getName()).append(",")
+//                        .append(book.getPrice()).append(",")
+//                        .append(book.getAuthor()).append("\n");
+//                bw.write(sb.toString());
+//                bw.flush();
+//            }
+            for (Book book : bookList) {
                 StringBuffer sb = new StringBuffer();
-                Book book = bookList.get(i);
                 sb.append(book.getId()).append(",")
                         .append(book.getName()).append(",")
                         .append(book.getPrice()).append(",")
