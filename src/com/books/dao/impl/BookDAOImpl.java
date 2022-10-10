@@ -29,7 +29,7 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
 
     @Override
     public List<Book> getBookList(Connection conn) {
-        String sql = "select * from books";
+        String sql = "select id, `name`, price, author from books";
         return super.getBeanList(conn, sql);
     }
 

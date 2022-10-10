@@ -4,7 +4,7 @@ import com.books.bean.Book;
 import com.books.dao.impl.BookDAOImpl;
 import com.books.dao.intface.BookDAO;
 import com.books.utils.JDBCUtils;
-import org.apache.commons.dbutils.DbUtils;
+//import org.apache.commons.dbutils.DbUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -65,7 +65,8 @@ public class Manu {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            DbUtils.closeQuietly(conn);
+//            DbUtils.closeQuietly(conn);
+            JDBCUtils.closeResources(conn);
         }
     }
 
@@ -107,7 +108,8 @@ public class Manu {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            DbUtils.closeQuietly(conn);
+//            DbUtils.closeQuietly(conn);
+            JDBCUtils.closeResources(conn);
         }
     }
 
@@ -182,7 +184,8 @@ public class Manu {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            DbUtils.closeQuietly(conn);
+//            DbUtils.closeQuietly(conn);
+            JDBCUtils.closeResources(conn);
         }
     }
 
@@ -228,7 +231,8 @@ public class Manu {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            DbUtils.closeQuietly(conn);
+//            DbUtils.closeQuietly(conn);
+            JDBCUtils.closeResources(conn);
         }
     }
 
@@ -286,7 +290,8 @@ public class Manu {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            DbUtils.closeQuietly(conn);
+//            DbUtils.closeQuietly(conn);
+            JDBCUtils.closeResources(conn);
         }
     }
 }
