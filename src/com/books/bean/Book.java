@@ -1,26 +1,28 @@
 package com.books.bean;
 
+import java.math.BigDecimal;
+
 public class Book {
-    private int id;
+    private Integer id;
     private String name;
-    private double price;
+    private BigDecimal price;
     private String author;
 
     public Book() {
     }
 
-    public Book(int id, String name, double price, String author) {
+    public Book(Integer id, String name, BigDecimal price, String author) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.author = author;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,11 +34,11 @@ public class Book {
         this.name = name;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

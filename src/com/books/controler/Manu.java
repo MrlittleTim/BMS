@@ -6,6 +6,7 @@ import com.books.dao.intface.BookDAO;
 import com.books.utils.JDBCUtils;
 //import org.apache.commons.dbutils.DbUtils;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ public class Manu {
             String name = scanner.nextLine();
             if (bookDAO.getBookByName(conn, name) == null) {
                 System.out.print("请输入价格：");
-                double price = scanner.nextDouble();
+                BigDecimal price = scanner.nextBigDecimal();
+//                double price = scanner.nextDouble();
                 System.out.print("请输入作者：");
                 scanner.nextLine();
                 String author = scanner.nextLine();
@@ -60,10 +62,12 @@ public class Manu {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 //            DbUtils.closeQuietly(conn);
             JDBCUtils.closeResources(conn);
@@ -103,10 +107,12 @@ public class Manu {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 //            DbUtils.closeQuietly(conn);
             JDBCUtils.closeResources(conn);
@@ -161,7 +167,8 @@ public class Manu {
                 scanner.nextLine();
                 String name = scanner.nextLine();
                 System.out.print("请输入需要更新的书籍价格：");
-                double price = scanner.nextDouble();
+//                double price = scanner.nextDouble();
+                BigDecimal price = scanner.nextBigDecimal();
                 System.out.print("请输入需要更新的书籍作者：");
                 scanner.nextLine();
                 String author = scanner.nextLine();
@@ -179,10 +186,12 @@ public class Manu {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 //            DbUtils.closeQuietly(conn);
             JDBCUtils.closeResources(conn);
@@ -226,10 +235,12 @@ public class Manu {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 //            DbUtils.closeQuietly(conn);
             JDBCUtils.closeResources(conn);
@@ -285,10 +296,12 @@ public class Manu {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 //            DbUtils.closeQuietly(conn);
             JDBCUtils.closeResources(conn);

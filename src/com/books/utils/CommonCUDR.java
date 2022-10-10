@@ -60,38 +60,39 @@ public class CommonCUDR {
     }
 
     public static <T> T queryBean(Connection conn, Class<T> clazz, String sql, Object... params) {
-        PreparedStatement preState = null;
-        ResultSet rs = null;
-        try {
-            preState = conn.prepareStatement(sql);
-            for (int i = 0; i < params.length; i++) {
-                preState.setObject(i + 1, params[i]);
-            }
-            rs = preState.executeQuery();
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            if (rs.next()) {
-                T t = clazz.newInstance();
-                for (int i = 0; i < columnCount; i++) {
-                    Object value = rs.getObject(i + 1);
-                    String columnLabel = metaData.getColumnLabel(i + 1);
-                    Field field = clazz.getDeclaredField(columnLabel);
-                    field.setAccessible(true);
-                    field.set(t, value);
-                }
-                return t;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtils.closeResources(null, preState, rs);
-        }
-        return null;
+//        PreparedStatement preState = null;
+//        ResultSet rs = null;
+//        try {
+//            preState = conn.prepareStatement(sql);
+//            for (int i = 0; i < params.length; i++) {
+//                preState.setObject(i + 1, params[i]);
+//            }
+//            rs = preState.executeQuery();
+//            ResultSetMetaData metaData = rs.getMetaData();
+//            int columnCount = metaData.getColumnCount();
+//            if (rs.next()) {
+//                T t = clazz.newInstance();
+//                for (int i = 0; i < columnCount; i++) {
+//                    Object value = rs.getObject(i + 1);
+//                    String columnLabel = metaData.getColumnLabel(i + 1);
+//                    Field field = clazz.getDeclaredField(columnLabel);
+//                    field.setAccessible(true);
+//                    field.set(t, value);
+//                }
+//                return t;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchFieldException e) {
+//            e.printStackTrace();
+//        } finally {
+//            JDBCUtils.closeResources(null, preState, rs);
+//        }
+//        return null;
+        return CommonCUDR.queryList(conn, clazz, sql, params).get(0);
     }
 }
