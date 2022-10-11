@@ -1,6 +1,5 @@
 package com.books.dao.impl;
 
-import com.alibaba.druid.sql.ast.statement.SQLAlterTableRenameIndex;
 import com.books.bean.Book;
 import com.books.dao.BaseDAO;
 import com.books.dao.intface.BookDAO;
@@ -17,13 +16,13 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
 
     @Override
     public boolean delBookByName(Connection conn, String name) {
-        String sql = "delete from books where name like ?";
+        String sql = "delete from books where name = ?";
         return super.executeUpdate(conn, sql, name) > 0;
     }
 
     @Override
     public boolean delBookById(Connection conn, int id) {
-        String sql = "delete from books where id like ?";
+        String sql = "delete from books where id = ?";
         return super.executeUpdate(conn, sql, id) > 0;
     }
 
@@ -35,13 +34,13 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
 
     @Override
     public Book getBookByName(Connection conn, String name) {
-        String sql = "select * from books where name like ?";
+        String sql = "select id, `name`, price, author from books where name = ?";
         return super.getBean(conn, sql, name);
     }
 
     @Override
     public Book getBookById(Connection conn, int id) {
-        String sql = "select * from books where id like ?";
+        String sql = "select id, `name`, price, author from books where id = ?";
         return super.getBean(conn, sql, id);
     }
 
