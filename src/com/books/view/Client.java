@@ -1,10 +1,10 @@
 package com.books.view;
 
-import com.books.controler.Manu;
+import com.books.controler.Menu;
 
 public class Client {
     public static void main(String[] args) {
-        Manu manu = new Manu();
+        Menu manu = new Menu();
         boolean flag = true;
         while (flag) {
             int choice = manu.showManu();

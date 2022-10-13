@@ -3,10 +3,8 @@ package com.books.utils;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.IOException;
+import java.sql.*;
 import java.util.Properties;
 
 public class JDBCUtils {
@@ -23,6 +21,27 @@ public class JDBCUtils {
 
     public static Connection getConnection() throws SQLException {
         return source.getConnection();
+    }
+
+
+    public static Connection connection() {
+        try {
+            Properties properties = new Properties();
+            properties.load(ClassLoader.getSystemClassLoader().getResourceAsStream("druid.properties"));
+            String driverClassName = properties.getProperty("driverClassName");
+            String url = properties.getProperty("url");
+            String username = properties.getProperty("username");
+            String password = properties.getProperty("password");
+            Class.forName(driverClassName);
+            return DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     public static void closeResources(Connection connection, Statement statement, ResultSet resultSet) {
         try {

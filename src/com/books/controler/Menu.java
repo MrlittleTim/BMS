@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Manu {
+public class Menu {
     Scanner scanner = new Scanner(System.in);
     BookDAO bookDAO = new BookDAOImpl();
 
@@ -25,14 +25,13 @@ public class Manu {
         System.out.println("0----------退出系统----------");
         System.out.println("===========================");
         System.out.print("请输入您的选择：");
-        int choice = scanner.nextInt();
-        return choice;
+        return scanner.nextInt();
     }
 
     public void addBook() {
         Connection conn = null;
         try {
-            conn = JDBCUtils.getConnection();
+            conn = JDBCUtils.connection();
             conn.setAutoCommit(false);
             System.out.print("请输入书名：");
             scanner.nextLine();
@@ -71,7 +70,7 @@ public class Manu {
     public void deleteBook() {
         Connection conn = null;
         try {
-            conn = JDBCUtils.getConnection();
+            conn = JDBCUtils.connection();
             conn.setAutoCommit(false);
             System.out.println("1. 按编号删除");
             System.out.println("2. 按书名删除");
@@ -114,7 +113,7 @@ public class Manu {
     public void updateBook() {
         Connection conn = null;
         try {
-            conn = JDBCUtils.getConnection();
+            conn = JDBCUtils.connection();
             conn.setAutoCommit(false);
             System.out.print("请输入需要更新的书籍编号：");
             int id = scanner.nextInt();
@@ -154,7 +153,7 @@ public class Manu {
     public void queryBook() {
         Connection conn = null;
         try {
-            conn = JDBCUtils.getConnection();
+            conn = JDBCUtils.connection();
             conn.setAutoCommit(false);
             System.out.println("1. 按编号查询");
             System.out.println("2. 按书名查询");
@@ -209,7 +208,7 @@ public class Manu {
     public void printAllBook() {
         Connection conn = null;
         try {
-            conn = JDBCUtils.getConnection();
+            conn = JDBCUtils.connection();
             conn.setAutoCommit(false);
             List<Book> bookList = bookDAO.getBookList(conn);
             if (bookList == null || bookList.size() == 0) {

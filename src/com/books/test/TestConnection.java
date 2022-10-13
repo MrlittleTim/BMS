@@ -1,6 +1,7 @@
 package com.books.test;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.books.utils.JDBCUtils;
 import com.mysql.jdbc.Driver;
 import org.junit.Test;
 
@@ -47,5 +48,11 @@ public class TestConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test3() {
+        Connection connection = JDBCUtils.connection();
+        System.out.println(connection);
     }
 }
